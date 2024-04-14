@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluefly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            background-color: black;
+            height: 20px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            top: 125px;
+            left: 0;
+            padding-top: 14px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 999;
+        }
+        .banner-image {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 160px;
+        }
+        nav {
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        .logo img {
+            width: 150px;
+            height: auto;
+            display: inline-block;
+            margin-top: 6px;
+            margin-right: 20px;
+        }
+        .icons {
+            position: absolute;
+            top: 50%;
+            right: 40px;
+            transform: translateY(-50%);
+            margin-right: 250px;
+        }
+        .icons img {
+            vertical-align: middle;
+            margin: 8px;
+        }
+        .search-text {
+            cursor: pointer;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .search-text:hover {
+            text-decoration: underline;
+        }
+        .search-box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 400px;
+            transform: translateY(-50%);
+            width: 200px;
+            padding: 10px;
+        }
+        .containerm {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .sub-category {
+            font-size: 10px;
+            display: inline-block;
+            margin-left: 20px;
+            color: black;
+            cursor: pointer;
+        }
+        .clearance {
+            color: red;
+        }
+        .additional-content {
+            display: none;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .additional-content.active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            position: fixed;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            z-index: 9999;
+            padding: 50px;
+        }
+        .additional-content img {
+            width: 100px;
+            margin-right: 20px;
+        }
+        .additional-content div {
+            font-size: 10px;
+            margin-bottom: 5px;
+            line-height: 2;
+            margin-left: 80px;
+        }
+        .additional-content div strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+
+        #carousel-container {
+        position: relative;
+        width: 70%;
+        height: 40vh;
+        overflow: hidden;
+        margin: auto;
+        top: 315px;
+
+    }
+
+    .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease;
+        background-size: cover;
+        background-position: 50% 50%;
+        text-align: center;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .carousel-slide img {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: -1;
+        
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 530px;
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 999;
+    }
+
+    .carousel-btn:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-btn.left {
+        left: 0;
+    }
+
+    .carousel-btn.right {
+        right: 0;
+    }
+
+    .small-text, .small-text-2 {
+        font-size: 14px;
+    }
+
+    .big-text, .big-text-2 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .shop-now, .shop-valentino {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+     
+    
+    .container {
+        width: 60%;
+        margin: 0 auto;
+        position: relative;
+        top: 330px;
+       
+    }
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        margin-bottom: 20px; /* Add some space below header */
+    }
+    .arrow-btn {
+        cursor: pointer;
+        padding: 10px;
+        border: none;
+        outline: none;
+        background-color: blanchedalmond;
+        position: absolute;
+    }
+    .arrow-btn-left {
+        left: 92.5%;
+    }
+    .arrow-btn-right {
+        right: 0;
+    }
+   
+    .recommended-products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .product-container {
+        flex-basis: calc(25% - 20px);
+        margin-bottom: 20px;
+    }
+    .product {
+        box-sizing: border-box;
+        width: 60%; /* Width of the container */
+        height: auto; /* Adjust height to fit image */
+        position: relative;
+       
+    }
+    .product img {
+        width: 100%;
+        height: auto;
+    }
+    .product-description {
+        position: absolute;
+        bottom: -100px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        font-family: monospace;
+        font-size: small;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+
+
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div id="textLine"></div>
+    </div>
+    <img class="banner-image" src="https://www.bluefly.com/cdn/shop/files/TOP_BANNER_ASSET_1600x.jpg?v=1712872949" alt="Banner Image">
+    <nav>
+        <div class="logo">
+            <img src="https://www.bluefly.com/cdn/shop/files/BLUEFLY-LOGO-11-20.png?v=1613183141" alt="Bluefly Logo">
+        </div>
+        <div class="icons">
+            <span class="search-text" onclick="toggleSearch()">
+                <img class="search-icon" src="https://tse1.mm.bing.net/th?id=OIP.l9Ompn9dr4LkcdmkvERyawHaHa&pid=Api&P=0&h=180" alt="search" width="25px">
+                Search
+            </span>
+            <img src="https://tse4.mm.bing.net/th?id=OIP.etPyP55EobSmSvAewS7uggHaHa&pid=Api&P=0&h=180" alt="user" width="15px">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.ivHXlSC2UMyOQyd8SZw8aQHaG2&pid=Api&P=0&h=180" alt="like" width="13px"> 
+            <img src="https://tse3.mm.bing.net/th?id=OIP.At6DxGtK_r9yLG_44nRCHgAAAA&pid=Api&P=0&h=180" alt="bag" width="15px">
+        </div>
+        <div class="search-box" id="searchBox">
+            <input type="text" placeholder="Search...">
+        </div>
+    </nav>
+    <div class="containerm">
+        <div id="sub-categories"></div>
+        <div id="additional-content"></div>
+    </div>
+
+    <div id="carousel-container">
+        <div class="carousel-slide" style="background-image: url('https://www.bluefly.com/cdn/shop/files/HERO_ASSET_1944x.jpg?v=1712873120');">
+            <div class="small-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -300%);">SPRING STYLE SAVINGS</div>
+            <div class="big-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">EXTRA 15% OFF<br>SELECT DESIGNER STYLES</div>
+            <div class="small-text" style="position: absolute; bottom: 60px; left: 20px; width: calc(100% - 40px);">GUCCI, FERRAGAMO, OFF-WHITE, VERSACE, AMIRI & MORE</div>
+            <button class="shop-now">Shop Now</button>
+        </div>
+        <div class="carousel-slide" style="background-image: url('https://www.bluefly.com/cdn/shop/files/shutterstock_773947222_97e3ce6e-89fa-4a0f-a5d5-d0d373ae995e_1944x.jpg?v=1660340662');">
+            <div class="big-text-2" style="position: absolute; top:  50%; left: 50%; transform: translate(-50%, -50%);">WORLD OF VALENTINO</div>
+            <div class="small-text-2" style="position: absolute; top:  50%; left: 50%; transform: translate(-50%, 150%);">Shop Handbags, Shoes, Apparel, Accessories & More</div>
+            <button class="shop-valentino">SHOP VALENTINO</button>
+        </div>
+    </div>
+
+    <div class="carousel-btn left" onclick="prevSlide()">&#10094;</div>
+    <div class="carousel-btn right" onclick="nextSlide()">&#10095;</div>
+    
+
+
+    <div class="container">
+        <div class="header">
+            <h2>RECOMMENDED PRODUCTS</h2>
+            <button class="arrow-btn arrow-btn-left" onclick="showPreviousProducts()">&#9664;</button>
+            <button class="arrow-btn arrow-btn-right" onclick="showNextProducts()">&#9654;</button>
+        </div>
+        <div class="recommended-products">
+            <div class="product-container">
+                <div class="product" >
+                    <img src="https://www.bluefly.com/cdn/shop/files/2041258_f61d0b27-ad6c-4da6-bd02-5c3a9da5f810_720x.jpg?v=1700873968" alt="t-shirt">
+                    <div class="product-description">HELLSTAR<br>STUDIOS<br>HELLSTAR<br>RECORDS<br>TEE<br>$209.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/107490439_360x.jpg?v=1712010073" alt="FRAMES">
+                    <div class="product-description">GIVENCHY MODERN<br>GENTLEMAN EAU DE PARFUM BOISEE<br>SPRAY<br>$194.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/2041258_f61d0b27-ad6c-4da6-bd02-5c3a9da5f810_720x.jpg?v=1700873968" alt="t-shirt">
+                    <div class="product-description">HELLSTAR<br>STUDIOS<br>HELLSTAR<br>RECORDS<br>TEE<br>$209.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/1965967_1800x1800.jpg?v=1705788621" alt="pant">
+                    <div class="product-description">AMIRI PAINT DRIP<br>CORE LOGO<br>SWEATPANT<br> BLUE & WHITE JOGGER <br> SWEATPANTS<br>$589.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/2057597_1800x1800.jpg?v=1705787252" alt="T-shirt">
+                    <div class="product-description">HELLSTAR<br>STUDIOS<br>HELLSTAR<br>RECORDS<br>TEE<br>$209.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/1965974_1800x1800.jpg?v=1705788628" alt="black pant">
+                    <div class="product-description">AMIRI PAINT DRIP<br>CORE LOGO<br>SWEATPANT<br> BLUE & WHITE JOGGER <br> SWEATPANTS<br>$589.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/2143357_1800x1800.jpg?v=1705787805" alt="jacket">
+                    <div class="product-description">GIVENCHY MODERN<br>GENTLEMAN EAU DE PARFUM BOISEE<br>SPRAY<br>$194.00</div>
+                </div>
+            </div>
+            <div class="product-container">
+                <div class="product">
+                    <img src="https://www.bluefly.com/cdn/shop/files/2142821_1800x1800.jpg?v=1708787767" alt="jacket">
+                    <div class="product-description">GIVENCHY MODERN<br>GENTLEMAN EAU DE PARFUM BOISEE<br>SPRAY<br>$194.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleSearch() {
+            var searchBox = document.getElementById("searchBox");
+            var searchIcon = document.querySelector(".search-icon");
+            var searchText = document.querySelector(".search-text");
+
+            if (searchBox.style.display === "none" || searchBox.style.display === "") {
+                searchBox.style.display = "block";
+                searchIcon.style.display = "none";
+                searchText.style.display = "none";
+            } else {
+                searchBox.style.display = "none";
+                searchIcon.style.display = "inline-block";
+                searchText.style.display = "inline-block";
+            }
+        }
+
+        window.onload = function () {
+            var textLines = [
+                "WELCOME TO BLUEFLY: Luxury brands at discounted prices",
+                "FREE STANDARD SHIPPING AND HANDLING FOR ORDERS OVER $199"
+            ];
+
+            var textElement = document.getElementById('textLine');
+            var currentIndex = 0;
+
+            function changeText() {
+                textElement.innerHTML = textLines[currentIndex];
+                currentIndex = (currentIndex + 1) % textLines.length;
+            }
+
+            setInterval(changeText, 2000);
+            changeText();
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var subCategories = [
+                "CLOTHING", "SHOES", "HANDBAG", "DESIGNERS", "SUNGLASSES",
+                "JEWELRY & WATCHES", "ACCESSORIES", "HOME", "UNDER $50", "CLEARANCE"
+            ];
+
+            var subCategoriesContainer = document.getElementById('sub-categories');
+            var additionalContentContainer = document.getElementById('additional-content');
+
+            subCategories.forEach(function(category) {
+                var div = document.createElement('div');
+                div.textContent = category;
+                div.classList.add('sub-category');
+                if (category === "CLEARANCE") {
+                    div.classList.add('clearance');
+                }
+                subCategoriesContainer.appendChild(div);
+                
+                div.addEventListener('mouseover', function() {
+                    if (category === "CLOTHING") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">
+                                <div>
+                                    <img src="https://www.bluefly.com/cdn/shop/files/women.jpg?v=1613619704" alt="Women's Clothing">
+                                    <strong>Dresses</strong>
+                                    Up to 80% off
+                                </div>
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    // Add similar content for other categories
+                    else if (category === "SHOES") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">
+                                <div>
+                                    <strong>WOMEN'S SHOES</strong>
+                                    <br>
+                                    Sweaters <br> Shop All <br>Boots <br>Espadrilles <br>Flats <br>Mules & Slides <br>Oxfords & Loafers<br>Pumps & Heels <br>Sandals <br>Slippers <br>Sneakers <br>Wedges
+                                </div>
+                                <div>
+                                    <strong>WOMEN'S DESIGNER'S</strong>
+                                    <br>
+                                    Shop All <br> Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S SHOES</strong><br>
+                                    Sweaters <br>Shop All <br>Boots <br>Espadrilles <br>Flats <br>Mules & Slides <br>Oxfords & Loafers<br>Pumps & Heels <br>Sandals <br>Slippers <br>Sneakers <br>Wedges
+                                </div>
+                                <div>
+                                    <strong>MEN'S DESIGNER'S</strong>
+                                    <br>
+                                    Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "HANDBAG") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">
+                                <div>
+                                    <img src="https://www.bluefly.com/cdn/shop/files/women.jpg?v=1613619704" alt="Women's Clothing">
+                                    <strong>Dresses</strong>
+                                    Up to 80% off
+                                </div>
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    // Add content for other categories here
+                    else if (category === "DESIGNERS") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">
+                                <div>
+                                    <img src="https://www.bluefly.com/cdn/shop/files/women.jpg?v=1613619704" alt="Women's Clothing">
+                                    <strong>Dresses</strong>
+                                    Up to 80% off
+                                </div>
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <br>
+                                    <br>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "SUNGLASSES") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "JEWELRY & WATCHES") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts 
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "ACCESSORIES") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear 
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "HOME") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear 
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "UNDER $50") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets 
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear 
+                                </div>
+                            </div>
+                        `;
+                    }
+                    else if (category === "CLEARANCE") {
+                        additionalContentContainer.innerHTML = `
+                            <div class="additional-content active">         
+                                <div>
+                                    <strong>WOMEN'S CLOTHING</strong>
+                                    <br>Shop All <br> Activewear <br> Coats & Jackets <br> Dresses <br> Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br> Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                                <div>
+                                    <strong>MEN'S CLOTHING</strong>
+                                    <br>Shop All <br>Activewear <br>Coats & Jackets <br>Dresses <br>Jeans & Denim <br>Jumpsuits & Rompers <br>Lingerie & Hosiery <br>Loungewear & Sleepwear <br>Pants & Leggings <br>Shorts <br>Skirts <br>Sweaters <br>Sweatshirts & Hoodies <br>Swimwear & Coverups <br>Tops & Tees
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                div.addEventListener('mouseout', function() {
+                    additionalContentContainer.innerHTML = '';
+                });
+            });
+        });
+
+
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function showSlide(index) {
+            if (index < 0) {
+                index = slides.length - 1;
+            } else if (index >= slides.length) {
+                index = 0;
+            }
+
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(${100 * (i - index)}%)`;
+            });
+
+            currentSlide = index;
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        showSlide(currentSlide);
+
+
+
+        const products = document.querySelectorAll('.product');
+    let currentIndex = 0;
+
+    function showNextProducts() {
+        const lastIndex = Math.min(currentIndex + 4, products.length);
+        hideAllProducts();
+        for (let i = currentIndex; i < lastIndex; i++) {
+            products[i].style.display = 'block';
+        }
+        currentIndex = lastIndex % products.length;
+    }
+
+    function showPreviousProducts() {
+        const firstIndex = Math.max(currentIndex - 4, 0);
+        hideAllProducts();
+        for (let i = firstIndex; i < currentIndex; i++) {
+            products[i].style.display = 'block';
+        }
+        currentIndex = firstIndex;
+    }
+
+    function hideAllProducts() {
+        products.forEach(product => {
+            product.style.display = 'none';
+        });
+    }
+
+    // Initially show the first 4 products
+    showNextProducts();
+
+        
+    </script>
+</body>
+</html>
